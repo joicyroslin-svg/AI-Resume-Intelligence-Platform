@@ -5,7 +5,7 @@ import streamlit as st
 from utils.pdf_reader import extract_text_from_pdf
 from utils.skill_extractor import extract_skills
 from utils.text_cleaner import clean_resume_text
-
+from utils.ats_score import calculate_ats_score
 
 RESUME_DIR = Path("resumes")
 
@@ -65,3 +65,46 @@ else:
     st.subheader("Resume Statistics")
     st.info(f"Total Words: {total_words}")
     st.info(f"Skills Detected: {len(skills)}")
+    st.subheader("Paste Job Description")
+
+    job_description = st.text_area(
+        "Enter Job Description",
+        height=200,
+    )
+
+    if job_description:
+        ats_score, matched_keywords, missing_keywords = calculate_ats_score(
+            skills,
+            job_description,
+        )
+
+        st.subheader("ATS Score")
+        st.progress(ats_score / 100)
+        st.success(f"ATS Score: {ats_score}/100")
+
+        st.subheader("Matched Keywords")
+        if matched_keywords:
+            for keyword in matched_keywords:
+                st.success(keyword)
+        else:
+            st.warning("No matching keywords found.")
+
+        st.subheader("Missing Keywords")
+        if missing_keywords:
+            for keyword in missing_keywords:
+                st.error(keyword)
+        else:
+            st.success("No missing keywords!")
+
+        st.subheader("Resume Improvement Suggestions")
+        if missing_keywords:
+            st.info(
+                "Try adding missing skills relevant to the job description."
+            )
+            st.info(
+                "Improve ATS score by including more matching keywords."
+            )
+        else:
+            st.success(
+                "Excellent resume match for this job role!"
+            )
