@@ -17,7 +17,6 @@ def calculate_ats_score(skills, job_description):
     all_possible_skills = [
         "python",
         "machine learning",
-        "deep learning",
         "nlp",
         "tensorflow",
         "pytorch",
@@ -28,7 +27,17 @@ def calculate_ats_score(skills, job_description):
         "opencv",
         "generative ai",
         "rag",
-        "langchain"
+        "langchain",
+        "deep learning",
+        "image processing",
+        "model deployment",
+        "data visualization",
+        "power bi",
+        "excel",
+        "statistics",
+        "llm",
+        "ai agents",
+        "prompt engineering"
     ]
 
     for keyword in all_possible_skills:

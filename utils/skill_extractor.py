@@ -1,7 +1,6 @@
 SKILLS_DB = [
     "python",
     "machine learning",
-    "deep learning",
     "nlp",
     "tensorflow",
     "pytorch",
@@ -19,7 +18,17 @@ SKILLS_DB = [
     "flask",
     "fastapi",
     "git",
-    "github"
+    "github",
+    "deep learning",
+    "image processing",
+    "model deployment",
+    "data visualization",
+    "power bi",
+    "excel",
+    "statistics",
+    "llm",
+    "ai agents",
+    "prompt engineering"
 ]
 
 def extract_skills(text):
