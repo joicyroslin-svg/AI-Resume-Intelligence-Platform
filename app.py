@@ -8,7 +8,7 @@ from utils.text_cleaner import clean_resume_text
 from utils.ats_score import calculate_ats_score
 from utils.resume_feedback import generate_feedback
 from utils.career_recommender import recommend_roles
-
+from utils.role_matcher import analyze_role_match, get_best_role_match, ROLE_SKILLS
 
 RESUME_DIR = Path("resumes")
 
@@ -128,6 +128,52 @@ else:
             height=200,
             placeholder="Paste full job description here for better ATS analysis...",
         )
+
+        st.subheader("Career Role Match Analysis")
+
+        selected_role = st.selectbox(
+            "Choose Target Career Role",
+            list(ROLE_SKILLS.keys()),
+        )
+
+        role_score, role_matched_skills, role_missing_skills = analyze_role_match(
+            skills,
+            selected_role,
+        )
+
+        best_role, best_role_score = get_best_role_match(skills)
+
+        st.info(f"Best Fit Role: {best_role} ({best_role_score}% match)")
+
+        st.subheader(f"{selected_role} Match Score")
+        st.progress(role_score / 100)
+
+        if role_score >= 80:
+            st.success(f"{role_score}% Match - Strong fit for {selected_role}")
+        elif role_score >= 50:
+            st.warning(f"{role_score}% Match - Moderate fit for {selected_role}")
+        else:
+            st.error(f"{role_score}% Match - Needs improvement for {selected_role}")
+
+        role_col1, role_col2 = st.columns(2)
+
+        with role_col1:
+            st.subheader("Matched Role Skills")
+
+            if role_matched_skills:
+                for skill in role_matched_skills:
+                    st.success(skill)
+            else:
+                st.warning("No matched role skills found.")
+
+        with role_col2:
+            st.subheader("Missing Role Skills")
+
+            if role_missing_skills:
+                for skill in role_missing_skills:
+                    st.error(skill)
+            else:
+                st.success("No missing role skills. Great match!")    
 
         if job_description:
             ats_score, matched_keywords, missing_keywords = calculate_ats_score(
