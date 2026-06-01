@@ -1,3 +1,32 @@
+ROLE_KEYWORD_MAP = {
+    "ai/ml intern": [
+        "python",
+        "machine learning",
+        "deep learning",
+        "nlp",
+        "generative ai",
+        "sql",
+        "git",
+        "github",
+    ],
+    "ai intern": [
+        "python",
+        "machine learning",
+        "generative ai",
+        "llm",
+        "prompt engineering",
+    ],
+    "data analyst": [
+        "python",
+        "sql",
+        "excel",
+        "power bi",
+        "data analysis",
+        "data visualization",
+    ],
+}
+
+
 def calculate_ats_score(skills, job_description):
 
     score = 0
@@ -7,6 +36,10 @@ def calculate_ats_score(skills, job_description):
     missing_keywords = []
 
     job_description = job_description.lower()
+
+    for role_phrase, related_keywords in ROLE_KEYWORD_MAP.items():
+        if role_phrase in job_description:
+            job_description += " " + " ".join(related_keywords)
 
     for skill in skills:
 
