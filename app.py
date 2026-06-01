@@ -289,6 +289,7 @@ st.set_page_config(
     page_title="AI Resume Intelligence Platform",
     page_icon="📄",
     layout="wide",
+    initial_sidebar_state="expanded",
 )
 
 st.markdown(
@@ -322,6 +323,38 @@ st.markdown(
 
     [data-testid="stSidebar"] * {
         color: white;
+    }
+
+    [data-testid="stSidebar"] div[role="radiogroup"] {
+        background: rgba(255, 255, 255, 0.08);
+        padding: 12px;
+        border-radius: 20px;
+        border: 1px solid rgba(148, 163, 184, 0.28);
+        box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+    }
+
+    [data-testid="stSidebar"] div[role="radiogroup"] label {
+        background: rgba(15, 23, 42, 0.88);
+        border: 1px solid rgba(125, 211, 252, 0.34);
+        box-shadow: none;
+        color: #f8fafc !important;
+    }
+
+    [data-testid="stSidebar"] div[role="radiogroup"] label:hover {
+        background: rgba(30, 64, 175, 0.58);
+        border-color: rgba(125, 211, 252, 0.85);
+        transform: translateX(3px);
+    }
+
+    [data-testid="stSidebar"] div[role="radiogroup"] label p {
+        color: #f8fafc !important;
+        font-weight: 800;
+    }
+
+    [data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked) {
+        background: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
+        border-color: #bae6fd;
+        box-shadow: 0 12px 24px rgba(37, 99, 235, 0.30);
     }
 
     [data-testid="stSidebar"] [data-testid="stFileUploader"] label,
@@ -373,19 +406,19 @@ st.markdown(
     }
 
     div[role="radiogroup"] label {
-        background: rgba(255, 255, 255, 0.08);
+        background: #ffffff;
         padding: 13px 16px;
         border-radius: 18px;
         margin-bottom: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.13);
+        border: 1px solid #e2e8f0;
         transition: 0.22s ease;
-        box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+        box-shadow: 0 8px 18px rgba(15,23,42,0.06);
     }
 
     div[role="radiogroup"] label:hover {
-        background: rgba(255, 255, 255, 0.20);
-        border: 1px solid rgba(125, 211, 252, 0.78);
-        transform: translateX(4px);
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        transform: translateY(-1px);
     }
 
     .hero-card {
@@ -396,6 +429,8 @@ st.markdown(
         margin-bottom: 26px;
         position: relative;
         overflow: hidden;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .hero-card::after {
@@ -407,6 +442,7 @@ st.markdown(
         height: 280px;
         border-radius: 999px;
         background: rgba(255,255,255,0.10);
+        pointer-events: none;
     }
 
     .hero-badge {
@@ -421,6 +457,8 @@ st.markdown(
         margin-bottom: 15px;
         text-transform: uppercase;
         letter-spacing: 1px;
+        position: relative;
+        z-index: 1;
     }
 
     .main-title {
@@ -430,14 +468,45 @@ st.markdown(
         margin-bottom: 11px;
         letter-spacing: -1.2px;
         line-height: 1.05;
-        max-width: 900px;
+        max-width: none;
+        width: 100%;
+        position: relative;
+        z-index: 1;
     }
 
     .main-subtitle {
         font-size: 18px;
         color: #cbd5e1;
         line-height: 1.75;
-        max-width: 860px;
+        max-width: none;
+        width: 100%;
+        position: relative;
+        z-index: 1;
+    }
+
+    .upload-callout {
+        width: 100%;
+        box-sizing: border-box;
+        background: rgba(239, 246, 255, 0.96);
+        border: 1px solid #bfdbfe;
+        border-left: 6px solid #2563eb;
+        color: #1e3a8a;
+        padding: 18px 22px;
+        border-radius: 18px;
+        box-shadow: 0 12px 26px rgba(15,23,42,0.08);
+        font-size: 16px;
+        font-weight: 750;
+        margin: 0 0 24px 0;
+        display: block;
+        clear: both;
+    }
+
+    div[role="radiogroup"] {
+        background: rgba(255,255,255,0.85);
+        padding: 14px;
+        border-radius: 22px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 10px 24px rgba(15,23,42,0.07);
     }
 
     .section-wrap {
@@ -611,10 +680,6 @@ st.markdown(
     footer {
         visibility: hidden;
     }
-
-    header {
-        visibility: hidden;
-    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -672,7 +737,14 @@ st.markdown(
 )
 
 if uploaded_file is None:
-    st.info("Upload a PDF resume from the sidebar to begin analysis.")
+    st.markdown(
+        """
+        <div class="upload-callout">
+            Upload a PDF resume in the sidebar to begin analysis.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     st.stop()
 
 resume_path = save_uploaded_resume(uploaded_file)
