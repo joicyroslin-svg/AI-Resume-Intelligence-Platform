@@ -603,6 +603,18 @@ st.markdown(
     .stSuccess, .stInfo, .stWarning, .stError {
         border-radius: 15px;
     }
+    /* Hide default Streamlit chrome for visitors */
+    #MainMenu {
+        visibility: hidden;
+    }
+
+    footer {
+        visibility: hidden;
+    }
+
+    header {
+        visibility: hidden;
+    }
     </style>
     """,
     unsafe_allow_html=True,
