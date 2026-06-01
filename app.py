@@ -727,7 +727,7 @@ if page == "Resume Overview":
         st.subheader("Resume Insights")
         st.plotly_chart(
             create_resume_insights_chart(total_words, len(skills)),
-            use_container_width=True,
+            width="stretch",
         )
 
     st.markdown("</div>", unsafe_allow_html=True)
@@ -767,7 +767,7 @@ elif page == "Career Role Match":
     with insight_col2:
         st.plotly_chart(
             create_score_gauge(role_score, f"{selected_role} Match"),
-            use_container_width=True,
+            width="stretch",
         )
 
     st.markdown("</div>", unsafe_allow_html=True)
@@ -801,14 +801,14 @@ elif page == "Career Role Match":
                 len(role_matched_skills),
                 len(role_missing_skills),
             ),
-            use_container_width=True,
+            width="stretch",
         )
 
     with graph_col2:
         st.subheader("All Role Match Comparison")
         st.plotly_chart(
             create_role_match_chart(skills),
-            use_container_width=True,
+            width="stretch",
         )
 
 elif page == "ATS Analysis":
@@ -839,7 +839,7 @@ elif page == "ATS Analysis":
             st.subheader("ATS Score Gauge")
             st.plotly_chart(
                 create_score_gauge(ats_score, "ATS Score"),
-                use_container_width=True,
+                width="stretch",
             )
             show_score_message(ats_score)
 
@@ -850,7 +850,7 @@ elif page == "ATS Analysis":
                     len(matched_keywords),
                     len(missing_keywords),
                 ),
-                use_container_width=True,
+                width="stretch",
             )
 
         st.markdown("</div>", unsafe_allow_html=True)
