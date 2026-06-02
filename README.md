@@ -76,29 +76,19 @@ The platform supports technical, non-technical, and hybrid career roles such as:
 
 ![Resume Overview](screenshots/resume-overview1.png.png)
 
-(screenshots/resume-overview2.png.png)
-
 ### Career Role Match
 
 ![Career Role Match](screenshots/career-role-match1.png.png)
 
-(screenshots/career-role-match2.png.png)
-
-(screenshots/career-role-match3.png.png)
 
 ### ATS Analysis
 
 ![ATS Analysis](screenshots/ats-analysis.png.png)
 
-(screenshots/ats-analysis1.png.png)
-
-(screenshots/ats-analysis2.png.png)
-
 ### AI Career Advisor
 
 ![AI Career Advisor](screenshots/ai-career-advisor1.png.png)
 
-(screenshots/ai-career-advisor2.png.png)
 
 ## How to Run Locally
 
